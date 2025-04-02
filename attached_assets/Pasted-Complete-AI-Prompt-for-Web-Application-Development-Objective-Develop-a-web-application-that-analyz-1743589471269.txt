@@ -1,0 +1,75 @@
+Complete AI Prompt for Web Application Development
+
+Objective:
+Develop a web application that analyzes YouTube videos based on their comments, likes, and overall sentiment to determine whether a video is worth watching. The application will provide a review categorized as Positive, Neutral, or Negative based on user feedback.
+
+
+---
+
+Prompt:
+
+*"I want to build a web application that analyzes YouTube video reviews and suggests whether a video is worth watching based on audience sentiment. The application should take a YouTube video URL as input and fetch the video’s comments, likes, and other engagement metrics. It should use Natural Language Processing (NLP) to analyze the sentiment of the comments, categorizing them as Positive, Neutral, or Negative. The system should then generate an overall rating and suggest if the video is worth watching.
+
+The application should include:*
+
+1. User Interface:
+
+A simple and clean UI where users can enter a YouTube video URL.
+
+A results page displaying analysis with a graphical representation (pie charts, bar graphs, etc.).
+
+A summary section with the final recommendation.
+
+
+
+2. Backend Processing:
+
+Fetch comments and video statistics using YouTube API.
+
+Process text sentiment using NLP techniques (e.g., Vader, TextBlob, or a custom ML model).
+
+Apply an algorithm to determine the final verdict based on sentiment score and likes/dislikes ratio.
+
+
+
+3. Analysis & Output:
+
+Display percentage of positive, neutral, and negative comments.
+
+Highlight key positive and negative comments.
+
+Provide an overall recommendation: "Highly Recommended," "Neutral," or "Not Recommended."
+
+
+
+4. Tech Stack:
+
+Frontend: React.js or Vue.js
+
+Backend: Node.js with Express or Python (Flask/Django)
+
+Database (if needed): MongoDB / Firebase
+
+API Integration: YouTube Data API
+
+NLP: NLTK, TextBlob, or Hugging Face Transformers
+
+
+
+5. Additional Features (Optional):
+
+User authentication to save analysis history.
+
+Comparison feature to analyze multiple videos at once.
+
+A browser extension for quick video analysis.
+
+
+
+
+The system should focus on accuracy and speed, ensuring that users get reliable insights before watching any video."
+
+
+---
+
+This prompt will guide a developer or AI model to generate a complete web application that fulfills your requirements. Let me know if you need any modifications!
