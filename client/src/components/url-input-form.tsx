@@ -185,7 +185,7 @@ export default function UrlInputForm({
         
         <Button 
           type="submit" 
-          className="w-full py-6 text-lg font-semibold mt-6" 
+          className="w-full py-6 text-lg font-semibold mt-6 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white shadow-md" 
           disabled={isLoading}
           variant="default"
         >

@@ -60,7 +60,7 @@ export default function Header() {
 
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="secondary" size="sm" className="flex items-center gap-2 bg-white text-primary hover:bg-red-50">
+                <Button variant="secondary" size="sm" className="flex items-center gap-2 bg-yellow-400 text-gray-800 hover:bg-yellow-300 border border-yellow-500 font-medium">
                   <History className="h-4 w-4" />
                   <span>History</span>
                 </Button>
@@ -104,7 +104,7 @@ export default function Header() {
           <div className="md:hidden flex items-center">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-white">
+                <Button variant="ghost" size="sm" className="bg-yellow-400 text-gray-800 hover:bg-yellow-300 border border-yellow-500">
                   <History className="h-5 w-5" />
                 </Button>
               </PopoverTrigger>
