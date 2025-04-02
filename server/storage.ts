@@ -4,17 +4,24 @@ import { users, type User, type InsertUser } from "@shared/schema";
 // you might need
 
 export interface IStorage {
+  // User methods
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  
+  // Video analysis methods
+  getVideoAnalysis(videoId: string): Promise<any | undefined>;
+  saveVideoAnalysis(analysis: any): Promise<any>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
+  private videoAnalyses: Map<string, any>;
   currentId: number;
 
   constructor() {
     this.users = new Map();
+    this.videoAnalyses = new Map();
     this.currentId = 1;
   }
 
@@ -33,6 +40,20 @@ export class MemStorage implements IStorage {
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
+  }
+
+  async getVideoAnalysis(videoId: string): Promise<any | undefined> {
+    return this.videoAnalyses.get(videoId);
+  }
+
+  async saveVideoAnalysis(analysis: any): Promise<any> {
+    // Ensure analysis has a videoId
+    if (!analysis.videoId) {
+      throw new Error("Video analysis must have a videoId");
+    }
+    
+    this.videoAnalyses.set(analysis.videoId, analysis);
+    return analysis;
   }
 }
 
