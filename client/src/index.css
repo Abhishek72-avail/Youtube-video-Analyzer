@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gray-50 text-foreground;
+  }
+
+  :root {
+    --primary: 239 67 229;
+    --primary-foreground: 255 255 255;
+    
+    --neutral-color: 245 158 11;
+    --positive-color: 16 185 129;
+    --negative-color: 239 68 68;
+  }
+}
