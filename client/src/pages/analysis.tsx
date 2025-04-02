@@ -13,6 +13,7 @@ import EngagementMetricsCard from "@/components/engagement-metrics-card";
 
 import { getVideoAnalysis, getAnalysisProgress } from "@/lib/api";
 import { VideoAnalysis } from "@/lib/types";
+import { addToSearchHistory } from "@/lib/searchHistory";
 
 export default function Analysis() {
   const [_, params] = useRoute<{ videoId: string }>('/analysis/:videoId');
@@ -61,6 +62,14 @@ export default function Analysis() {
       });
     }
   }, [error, toast]);
+  
+  // Save to search history when analysis is complete
+  useEffect(() => {
+    if (analysis && analysis.videoDetails) {
+      // Add to search history
+      addToSearchHistory(analysis.videoDetails);
+    }
+  }, [analysis]);
 
   const isComplete = !isPolling && !isLoading && analysis;
   

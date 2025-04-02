@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { 
@@ -6,16 +6,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { History, Menu, X } from "lucide-react";
+import { History, Menu, X, Trash2 } from "lucide-react";
+import { getSearchHistory, clearSearchHistory, SearchHistoryItem } from "@/lib/searchHistory";
 
 export default function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [recentSearches] = useState([
-    { id: 'dQw4w9WgXcQ', title: 'Rick Astley - Never Gonna Give You Up' },
-    { id: 'jNQXAC9IVRw', title: 'Me at the zoo' },
-    { id: 'Qw4w9WgXcQ', title: 'YouTube Rewind 2022' },
-  ]);
+  const [recentSearches, setRecentSearches] = useState<SearchHistoryItem[]>([]);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  
+  // Load search history when popover opens
+  useEffect(() => {
+    if (popoverOpen) {
+      setRecentSearches(getSearchHistory());
+    }
+  }, [popoverOpen]);
+  
+  const handleClearHistory = () => {
+    clearSearchHistory();
+    setRecentSearches([]);
+  };
 
   return (
     <header className="bg-gradient-to-r from-red-700 to-red-900 shadow-lg">
@@ -58,7 +68,7 @@ export default function Header() {
               </Link>
             </nav>
 
-            <Popover>
+            <Popover onOpenChange={setPopoverOpen}>
               <PopoverTrigger asChild>
                 <Button variant="secondary" size="sm" className="flex items-center gap-2 bg-yellow-400 text-gray-800 hover:bg-yellow-300 border border-yellow-500 font-medium">
                   <History className="h-4 w-4" />
@@ -66,8 +76,18 @@ export default function Header() {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-72 p-0" align="end">
-                <div className="p-4 border-b border-gray-200">
+                <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                   <h3 className="font-medium">Recent Searches</h3>
+                  {recentSearches.length > 0 && (
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={handleClearHistory}
+                      className="h-8 px-2 text-red-600 hover:text-red-800 hover:bg-red-50"
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" /> Clear
+                    </Button>
+                  )}
                 </div>
                 {recentSearches.length > 0 ? (
                   <div className="max-h-80 overflow-auto">
@@ -83,7 +103,14 @@ export default function Header() {
                               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                             </svg>
                           </div>
-                          <div className="ml-3">
+                          {item.thumbnailUrl ? (
+                            <img 
+                              src={item.thumbnailUrl} 
+                              alt={item.title}
+                              className="h-10 w-16 object-cover rounded mr-2"
+                            />
+                          ) : null}
+                          <div className="ml-3 flex-1">
                             <p className="text-sm font-medium text-gray-900 truncate">{item.title}</p>
                             <p className="text-xs text-gray-500">youtube.com/watch?v={item.id}</p>
                           </div>
@@ -102,15 +129,25 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <Popover>
+            <Popover onOpenChange={setPopoverOpen}>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="sm" className="bg-yellow-400 text-gray-800 hover:bg-yellow-300 border border-yellow-500">
                   <History className="h-5 w-5" />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-72 p-0" align="end">
-                <div className="p-4 border-b border-gray-200">
+                <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                   <h3 className="font-medium">Recent Searches</h3>
+                  {recentSearches.length > 0 && (
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={handleClearHistory}
+                      className="h-8 px-2 text-red-600 hover:text-red-800 hover:bg-red-50"
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" /> Clear
+                    </Button>
+                  )}
                 </div>
                 {recentSearches.length > 0 ? (
                   <div className="max-h-80 overflow-auto">
@@ -126,7 +163,14 @@ export default function Header() {
                               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                             </svg>
                           </div>
-                          <div className="ml-3">
+                          {item.thumbnailUrl ? (
+                            <img 
+                              src={item.thumbnailUrl} 
+                              alt={item.title}
+                              className="h-10 w-16 object-cover rounded mr-2"
+                            />
+                          ) : null}
+                          <div className="ml-3 flex-1">
                             <p className="text-sm font-medium text-gray-900 truncate">{item.title}</p>
                             <p className="text-xs text-gray-500">youtube.com/watch?v={item.id}</p>
                           </div>
