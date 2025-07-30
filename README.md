@@ -5,7 +5,7 @@
 ## Screenshots
 
 ### Home Interface
-![Home Interface](image1.png)
+![Home Interface](attached_assets/image1.png)
 *Main interface for video analysis*
 
 ### Main Analysis Page
