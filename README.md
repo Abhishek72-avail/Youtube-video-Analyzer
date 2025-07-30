@@ -9,7 +9,7 @@
 *Main interface for video analysis*
 
 ### Main Analysis Page
-![Main Analysis Page](image2.png)
+![Main Analysis Page](attached_assets/Main Analysis Page.png)
 *Video URL input and analysis interface*
 
 ### Features Overview
