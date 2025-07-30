@@ -5,7 +5,7 @@
 ## Screenshots
 
 ### Home Interface
-![Home Interface](image6.png)
+![Home Interface](image1.png)
 *Main interface for video analysis*
 
 ### Main Analysis Page
@@ -25,6 +25,6 @@
 *Detailed sentiment analysis with feedback breakdown*
 
 ### Contact Page
-![Contact Page](image1.png)
+![Contact Page](image6.png)
 *Contact form and support information*
 
