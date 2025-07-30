@@ -1,5 +1,17 @@
 # YouTube Video Analyzer
 
+### Tech Stack:
+
+- Frontend: React.js or Vue.js
+
+- Backend: Node.js with Express or Python (Flask/Django)
+
+- Database (if needed): MongoDB / Firebase
+
+- API Integration: YouTube Data API
+
+- NLP: NLTK, TextBlob, or Hugging Face Transformers
+
 **Discover if videos are worth your time**
 
 ## Screenshots
